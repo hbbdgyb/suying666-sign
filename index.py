@@ -4,7 +4,7 @@ import re
 import sys
 import time
 from urllib.parse import urlparse
-
+from weixin3 import WeChat
 import requests
 from bs4 import BeautifulSoup
 
@@ -151,17 +151,9 @@ def clockIn(host):
 
 
 def sendMessage(msg):
-    # print(msg)
     if key:
-        res = requests.post(
-            url='https://sc.ftqq.com/' + key + '.send',
-            data={
-                'title': '速鹰666自动签到结果通知',
-                'desp': msg
-            },
-            timeout=30
-        )
-        # print(res.text)
+        weixin = WeChat(corpsecret=key)
+        weixin.send('GuoYaBin','速鹰666自动签到结果通知',msg)
 
 
 def main_handler(event, context):
